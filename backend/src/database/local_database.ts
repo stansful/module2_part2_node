@@ -14,7 +14,7 @@ class LocalDatabase implements Database<User> {
     users.forEach((user) => this.create(user));
   }
 
-  findAll(): User[] {
+  public findAll(): User[] {
     return this.database;
   }
 
@@ -23,10 +23,9 @@ class LocalDatabase implements Database<User> {
     if (!user) {
       throw new Error('User did not exist');
     }
-    return user;
   }
 
-  create(candidate: User): User {
+  public create(candidate: User): User {
     const user = this.findOne(candidate);
     if (user) {
       throw new Error('User already exist');
@@ -35,7 +34,7 @@ class LocalDatabase implements Database<User> {
     return candidate;
   }
 
-  delete(candidate: User): User {
+  public delete(candidate: User): User {
     const user = this.findOne(candidate);
     if (!user) {
       throw new Error('User didnt exist');
