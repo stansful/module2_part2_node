@@ -1,7 +1,7 @@
 import http, { IncomingMessage, Server, ServerResponse } from 'http';
 import { EventEmitter } from 'events';
-import { Routes, VoidHandler } from './framework_interfaces';
 import { config } from '../configs/config';
+import { Router } from './router';
 
 export class Application {
   private server: Server;
@@ -42,8 +42,6 @@ export class Application {
       const url = this.getExpandedUrl(req.url);
 
       this.receiveData(req, res, url);
-
-      res.end('Hi');
     });
   }
 
@@ -51,14 +49,14 @@ export class Application {
     return this.server.listen(port, callback);
   }
 
-  public registerRouter(router: Routes) {
-    const endpoints = Object.keys(router);
+  public registerRouter(router: Router) {
+    const endpoints = Object.keys(router.routes);
 
     endpoints.forEach((pathName) => {
-      const methods = Object.keys(router[pathName]);
+      const methods = Object.keys(router.routes[pathName]);
 
       methods.forEach((method) => {
-        const handler = router[pathName][method];
+        const handler = router.routes[pathName][method];
 
         this.emitter.on(`${method}:${pathName}`, handler);
       });
