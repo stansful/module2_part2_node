@@ -14,11 +14,11 @@ export class Router {
     }
 
     const endpointMethod = this.routes[path][method];
-    if (endpointMethod) {
+    if (!endpointMethod) {
+      this.routes[path][method] = handler;
+    } else {
       throw new Error(`Method: ${method} is already exist in ${endpoint}`);
     }
-
-    this.routes[path][method] = handler;
   }
 
   public get(path: string, handler: VoidHandler) {
