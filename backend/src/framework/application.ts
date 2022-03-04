@@ -2,6 +2,7 @@ import http, { IncomingMessage, Server, ServerResponse } from 'http';
 import { EventEmitter } from 'events';
 import { config } from '../configs/config';
 import { Router } from './router';
+import { responseService } from '../response/response_service';
 
 export class Application {
   private server: Server;
@@ -32,7 +33,7 @@ export class Application {
       const event = this.emitter.emit(`${req.method}:${url.pathname}`, req, res, url, body);
 
       if (!event) {
-        res.end('Route didnt exist =(');
+        responseService.notFound(res);
       }
     });
   }
