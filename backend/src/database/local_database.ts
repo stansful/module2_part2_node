@@ -18,10 +18,10 @@ class LocalDatabase implements Database<User> {
     return this.database;
   }
 
-  findOne(candidate: User): User {
-    const user = this.database.find((user) => user.email === candidate.email);
-    if (!user) {
-      throw new Error('User did not exist');
+  public findOne(candidate: User): User | undefined {
+    const user = this.database.find((user) => user.email === candidate?.email);
+    if (user) {
+      return user;
     }
   }
 
