@@ -1,12 +1,24 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { User } from './user_interface';
+import { localDatabase } from '../database/local_database';
+import { responseService } from '../response/response_service';
 
 class UserService {
-  signIn(req: IncomingMessage, res: ServerResponse, url: URL, body: User) {
-    console.log(url.searchParams, body);
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('token:token');
+  public signIn(req: IncomingMessage, res: ServerResponse, url: URL, body: User) {
+    const { email, password } = body;
+    const candidate: User = { email, password };
+
+    const user = localDatabase.findOne(candidate);
+    if (!user) {
+      responseService.emailOrPasswordInvalid(res);
+    } else {
+      const passwordMatch = user.password === candidate.password;
+      if (passwordMatch) {
+        responseService.successSignIn(res);
+      } else {
+        responseService.emailOrPasswordInvalid(res);
+      }
+    }
   }
 }
 
