@@ -1,27 +1,42 @@
-import http, { Server } from 'http';
-import { VoidHandler } from './framework_interfaces';
+import http, { IncomingMessage, Server, ServerResponse } from 'http';
+import { EventEmitter } from 'events';
+import { Routes, VoidHandler } from './framework_interfaces';
 
 export class Application {
   private server: Server;
+  private emitter: EventEmitter;
 
   constructor() {
+    this.emitter = new EventEmitter();
     this.server = this.createServer();
+  }
+
+  private getExpandedUrl(reqUrl: string = ''): URL {
+    const apiURL = `${process.env.PROTOCOL}://${process.env.DOMAIN}:${process.env.PORT}`;
+    return new URL(`${apiURL}${reqUrl}`);
+  }
+
+  private receiveData(req: IncomingMessage, res: ServerResponse, url: URL) {
+    let body = '';
+
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
+
+    req.on('end', () => {
+      if (body) {
+        body = JSON.parse(body);
+      }
+
+      this.emitter.emit(`${req.method}:${url.pathname}`, req, res, url, body);
+    });
   }
 
   private createServer() {
     return http.createServer((req, res) => {
-      let body = '';
+      const url = this.getExpandedUrl(req.url);
 
-      req.on('data', (chunk) => {
-        body += chunk;
-      });
-
-      req.on('end', () => {
-        if (body) {
-          body = JSON.parse(body);
-          console.log(body);
-        }
-      });
+      this.receiveData(req, res, url);
 
       res.end('Hi');
     });
