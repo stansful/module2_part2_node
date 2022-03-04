@@ -29,7 +29,11 @@ export class Application {
         body = JSON.parse(body);
       }
 
-      this.emitter.emit(`${req.method}:${url.pathname}`, req, res, url, body);
+      const event = this.emitter.emit(`${req.method}:${url.pathname}`, req, res, url, body);
+
+      if (!event) {
+        res.end('Route didnt exist =(');
+      }
     });
   }
 
