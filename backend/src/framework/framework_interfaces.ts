@@ -1,6 +1,8 @@
+import { IncomingMessage, ServerResponse } from 'http';
+
 export type HttpMethods = 'GET' | 'POST';
 
-export type VoidHandler = () => void;
+export type VoidHandler = (req?: IncomingMessage, res?: ServerResponse, url?: URL, body?: any) => void;
 
 export interface RouteMethods {
   [key: string]: VoidHandler;
