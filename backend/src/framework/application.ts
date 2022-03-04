@@ -47,7 +47,7 @@ export class Application {
     });
   }
 
-  public listen(port: number, callback: VoidHandler): http.Server {
+  public listen(port: number, callback: () => void): http.Server {
     return this.server.listen(port, callback);
   }
 
