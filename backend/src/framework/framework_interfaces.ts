@@ -3,8 +3,7 @@ export type HttpMethods = 'GET' | 'POST';
 export type VoidHandler = () => void;
 
 export interface RouteMethods {
-  GET?: VoidHandler;
-  POST?: VoidHandler;
+  [key: string]: VoidHandler;
 }
 
 export interface Routes {
