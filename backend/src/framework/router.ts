@@ -20,4 +20,12 @@ export class Router {
 
     this.routes[path][method] = handler;
   }
+
+  public get(path: string, handler: VoidHandler) {
+    this.addRoute('GET', path, handler);
+  }
+
+  public post(path: string, handler: VoidHandler) {
+    this.addRoute('POST', path, handler);
+  }
 }
