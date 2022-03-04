@@ -1,6 +1,7 @@
 import http, { IncomingMessage, Server, ServerResponse } from 'http';
 import { EventEmitter } from 'events';
 import { Routes, VoidHandler } from './framework_interfaces';
+import { config } from '../configs/config';
 
 export class Application {
   private server: Server;
@@ -12,7 +13,7 @@ export class Application {
   }
 
   private getExpandedUrl(reqUrl: string = ''): URL {
-    const apiURL = `${process.env.PROTOCOL}://${process.env.DOMAIN}:${process.env.PORT}`;
+    const apiURL = `${config.PROTOCOL}://${config.DOMAIN}:${config.PORT}`;
     return new URL(`${apiURL}${reqUrl}`);
   }
 
