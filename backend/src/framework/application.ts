@@ -13,7 +13,7 @@ export class Application {
   }
 
   private getExpandedUrl(reqUrl: string = ''): URL {
-    const apiURL = `${config.PROTOCOL}://${config.DOMAIN}:${config.PORT}`;
+    const apiURL = `${config.env.PROTOCOL}://${config.env.DOMAIN}:${config.env.PORT}`;
     return new URL(`${apiURL}${reqUrl}`);
   }
 
