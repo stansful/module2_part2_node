@@ -45,4 +45,18 @@ export class Application {
   public listen(port: number, callback: VoidHandler): http.Server {
     return this.server.listen(port, callback);
   }
+
+  public registerRouter(router: Routes) {
+    const endpoints = Object.keys(router);
+
+    endpoints.forEach((pathName) => {
+      const methods = Object.keys(router[pathName]);
+
+      methods.forEach((method) => {
+        const handler = router[pathName][method];
+
+        this.emitter.on(`${method}:${pathName}`, handler);
+      });
+    });
+  }
 }
