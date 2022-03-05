@@ -9,3 +9,9 @@ export interface ResponseSuccessSignIn {
 export interface ResponseNotFoundMessage {
   message: string;
 }
+
+export interface ResponseGalleryMessage {
+  objects: string[];
+  page: number;
+  total: number;
+}
