@@ -4,4 +4,5 @@ export interface Config {
     PROTOCOL: string;
     DOMAIN: string;
   };
+  DEFAULT_LIMIT: number;
 }

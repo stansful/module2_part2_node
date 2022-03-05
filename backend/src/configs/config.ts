@@ -6,4 +6,5 @@ export const config: Config = {
     PROTOCOL: process.env.PROTOCOL || 'http',
     DOMAIN: process.env.DOMAIN || 'localhost',
   },
+  DEFAULT_LIMIT: 5,
 };
