@@ -16,9 +16,9 @@ class ResponseService {
     res.end(JSON.stringify(token));
   }
 
-  public notFound(res: ServerResponse) {
-    const notFoundMessage: ResponseNotFoundMessage = { message: 'Not Found' };
-    res.statusCode = 401;
+  public notFound(res: ServerResponse, message = 'Not Found') {
+    const notFoundMessage: ResponseNotFoundMessage = { message };
+    res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(notFoundMessage));
   }
