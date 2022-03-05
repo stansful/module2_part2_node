@@ -5,3 +5,7 @@ export interface ResponseErrorMessage {
 export interface ResponseSuccessSignIn {
   token: string;
 }
+
+export interface ResponseNotFoundMessage {
+  message: string;
+}

@@ -1,5 +1,5 @@
 import { ServerResponse } from 'http';
-import { ResponseErrorMessage, ResponseSuccessSignIn } from './response_interfaces';
+import { ResponseErrorMessage, ResponseNotFoundMessage, ResponseSuccessSignIn } from './response_interfaces';
 
 class ResponseService {
   public emailOrPasswordInvalid(res: ServerResponse) {
@@ -17,7 +17,7 @@ class ResponseService {
   }
 
   public notFound(res: ServerResponse) {
-    const notFoundMessage = { message: 'Not Found' };
+    const notFoundMessage: ResponseNotFoundMessage = { message: 'Not Found' };
     res.statusCode = 401;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(notFoundMessage));
