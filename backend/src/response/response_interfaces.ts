@@ -15,3 +15,7 @@ export interface ResponseGalleryMessage {
   page: number;
   total: number;
 }
+
+export interface ResponseBadRequestMessage {
+  errorMessage: string;
+}

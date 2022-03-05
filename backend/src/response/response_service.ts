@@ -33,6 +33,15 @@ class ResponseService {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(object));
   }
+
+  public badRequest(res: ServerResponse, end: number, start: number = 0) {
+    const errorMessage: ResponseBadRequestMessage = {
+      errorMessage: `Page should be greater than ${start} and less than ${end}`,
+    };
+    res.statusCode = 400;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(errorMessage));
+  }
 }
 
 export const responseService = new ResponseService();
