@@ -1,4 +1,4 @@
-const API_URL = 'https://hjdjs55gol.execute-api.us-east-1.amazonaws.com/api';
+const API_URL = 'http://localhost:5000';
 const PAGE_DID_NOT_EXIST = 'Page didnt exist, we set page to 1';
 const VALIDATION_FAILED = 'Please re-enter password & username';
 const EVENT_TYPES = {
