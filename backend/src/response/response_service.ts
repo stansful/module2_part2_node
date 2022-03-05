@@ -1,5 +1,6 @@
 import { ServerResponse } from 'http';
 import {
+  ResponseBadRequestMessage,
   ResponseErrorMessage,
   ResponseGalleryMessage,
   ResponseNotFoundMessage,
@@ -7,7 +8,7 @@ import {
 } from './response_interfaces';
 
 class ResponseService {
-  public emailOrPasswordInvalid(res: ServerResponse) {
+  public badCredentials(res: ServerResponse) {
     const errorMessage: ResponseErrorMessage = { errorMessage: 'Email or password are invalid.' };
     res.statusCode = 401;
     res.setHeader('Content-Type', 'application/json');

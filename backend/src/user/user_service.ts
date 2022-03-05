@@ -10,13 +10,13 @@ class UserService {
 
     const user = localDatabase.findOne(candidate);
     if (!user) {
-      responseService.emailOrPasswordInvalid(res);
+      responseService.badCredentials(res);
     } else {
       const passwordMatch = user.password === candidate.password;
       if (passwordMatch) {
         responseService.successSignIn(res);
       } else {
-        responseService.emailOrPasswordInvalid(res);
+        responseService.badCredentials(res);
       }
     }
   }
