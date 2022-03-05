@@ -1,5 +1,10 @@
 import { ServerResponse } from 'http';
-import { ResponseErrorMessage, ResponseNotFoundMessage, ResponseSuccessSignIn } from './response_interfaces';
+import {
+  ResponseErrorMessage,
+  ResponseGalleryMessage,
+  ResponseNotFoundMessage,
+  ResponseSuccessSignIn,
+} from './response_interfaces';
 
 class ResponseService {
   public emailOrPasswordInvalid(res: ServerResponse) {
@@ -21,6 +26,12 @@ class ResponseService {
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(notFoundMessage));
+  }
+
+  public galleryObjects(res: ServerResponse, object: ResponseGalleryMessage) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(object));
   }
 }
 
