@@ -6,12 +6,13 @@ import {
   ResponseSuccessSignIn,
 } from './response_interfaces';
 import { tokenService } from '../token/token_service';
+import { config } from '../configs/config';
 
 class ResponseService {
-  public badCredentials(res: ServerResponse) {
-    const errorMessage: ResponseErrorMessage = { errorMessage: 'Email or password are invalid.' };
+  public badCredentials(res: ServerResponse, message: string = 'Email or password are invalid.') {
+    const errorMessage: ResponseErrorMessage = { errorMessage: message };
 
-    res.statusCode = 401;
+    res.statusCode = config.httpStatusCodes.UNAUTHORIZED;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(errorMessage));
   }
@@ -19,7 +20,7 @@ class ResponseService {
   public successSignIn(res: ServerResponse) {
     const token: ResponseSuccessSignIn = { token: tokenService.token };
 
-    res.statusCode = 200;
+    res.statusCode = config.httpStatusCodes.OK;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(token));
   }
@@ -27,13 +28,13 @@ class ResponseService {
   public notFound(res: ServerResponse, message = 'Not Found') {
     const notFoundMessage: ResponseMessage = { message };
 
-    res.statusCode = 404;
+    res.statusCode = config.httpStatusCodes.NOT_FOUND;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(notFoundMessage));
   }
 
   public galleryObjects<Type>(res: ServerResponse, object: Type) {
-    res.statusCode = 200;
+    res.statusCode = config.httpStatusCodes.OK;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(object));
   }
@@ -43,7 +44,7 @@ class ResponseService {
       errorMessage: `Page should be greater than ${start} and less than ${end}`,
     };
 
-    res.statusCode = 400;
+    res.statusCode = config.httpStatusCodes.BAD_REQUEST;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(errorMessage));
   }
@@ -51,7 +52,7 @@ class ResponseService {
   public unauthorized(res: ServerResponse, message = 'Unauthorized') {
     const unauthorizedMessage: ResponseMessage = { message };
 
-    res.statusCode = 401;
+    res.statusCode = config.httpStatusCodes.UNAUTHORIZED;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(unauthorizedMessage));
   }
