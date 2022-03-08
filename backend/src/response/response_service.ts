@@ -2,21 +2,23 @@ import { ServerResponse } from 'http';
 import {
   ResponseBadRequestMessage,
   ResponseErrorMessage,
-  ResponseGalleryMessage,
-  ResponseNotFoundMessage,
+  ResponseMessage,
   ResponseSuccessSignIn,
 } from './response_interfaces';
+import { tokenService } from '../token/token_service';
 
 class ResponseService {
   public badCredentials(res: ServerResponse) {
     const errorMessage: ResponseErrorMessage = { errorMessage: 'Email or password are invalid.' };
+
     res.statusCode = 401;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(errorMessage));
   }
 
   public successSignIn(res: ServerResponse) {
-    const token: ResponseSuccessSignIn = { token: 'token' };
+    const token: ResponseSuccessSignIn = { token: tokenService.token };
+
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(token));
@@ -39,6 +41,7 @@ class ResponseService {
     const errorMessage: ResponseBadRequestMessage = {
       errorMessage: `Page should be greater than ${start} and less than ${end}`,
     };
+
     res.statusCode = 400;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(errorMessage));
