@@ -25,7 +25,8 @@ class ResponseService {
   }
 
   public notFound(res: ServerResponse, message = 'Not Found') {
-    const notFoundMessage: ResponseNotFoundMessage = { message };
+    const notFoundMessage: ResponseMessage = { message };
+
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(notFoundMessage));

@@ -6,7 +6,7 @@ export interface ResponseSuccessSignIn {
   token: string;
 }
 
-export interface ResponseNotFoundMessage {
+export interface ResponseMessage {
   message: string;
 }
 
