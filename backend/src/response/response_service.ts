@@ -31,7 +31,7 @@ class ResponseService {
     res.end(JSON.stringify(notFoundMessage));
   }
 
-  public galleryObjects(res: ServerResponse, object: ResponseGalleryMessage) {
+  public galleryObjects<Type>(res: ServerResponse, object: Type) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(object));
