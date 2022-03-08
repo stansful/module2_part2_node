@@ -3,6 +3,8 @@ import { createReadStream } from 'fs';
 import fs from 'fs/promises';
 import { VoidHandler } from './framework_interfaces';
 import { config } from '../configs/config';
+import { Router } from './router';
+import path from 'path';
 
 class StaticService {
   public streamHandler(filePath: string): VoidHandler {
@@ -32,6 +34,25 @@ class StaticService {
       res.write(fileBuffer);
       res.end();
     } as VoidHandler;
+  }
+
+  public addStaticRoutes(
+    subject: string[],
+    subjectPath: string,
+    router: Router,
+    handler: Function,
+    contentTypeValue: string,
+    endpointPrefix = '',
+  ) {
+    subject.forEach((file) => {
+      const filePath = path.join(subjectPath, file);
+
+      router.get(`${endpointPrefix}/${file}`, handler(filePath, contentTypeValue));
+
+      if (file === 'index.html') {
+        router.get('/', handler(filePath, contentTypeValue));
+      }
+    });
   }
 }
 
