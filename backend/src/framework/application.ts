@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import { config } from '../configs/config';
 import { Router } from './router';
 import { responseService } from '../response/response_service';
+import { staticRouter } from './static_controller';
 
 export class Application {
   private server: Server;
@@ -11,7 +12,7 @@ export class Application {
   constructor() {
     this.server = this.createServer();
     this.emitter = new EventEmitter();
-    this.server = this.createServer();
+    this.registerRouter(staticRouter);
   }
 
   private getExpandedUrl(reqUrl: string = ''): URL {
