@@ -2,7 +2,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 
 export type HttpMethods = 'GET' | 'POST';
 
-export type VoidHandler = (req?: IncomingMessage, res?: ServerResponse, url?: URL, body?: any) => void;
+export type VoidHandler = (req?: IncomingMessage, res?: ServerResponse, url?: URL, body?: any) => Promise<void> | void;
 
 export interface RouteMethods {
   [key: string]: VoidHandler;
