@@ -9,6 +9,7 @@ export class Application {
   private emitter: EventEmitter;
 
   constructor() {
+    this.server = this.createServer();
     this.emitter = new EventEmitter();
     this.server = this.createServer();
   }
