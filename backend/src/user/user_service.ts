@@ -5,20 +5,19 @@ import { responseService } from '../response/response_service';
 
 class UserService {
   public signIn(req: IncomingMessage, res: ServerResponse, url: URL, body: User) {
-    const { email, password } = body;
-    const candidate: User = { email, password };
+    const candidate: User = { email: body.email, password: body.password };
 
     const user = localDatabase.findOne(candidate);
-    if (!user) {
-      responseService.badCredentials(res);
-    } else {
+
+    if (user) {
       const passwordMatch = user.password === candidate.password;
+
       if (passwordMatch) {
-        responseService.successSignIn(res);
-      } else {
-        responseService.badCredentials(res);
+        return responseService.successSignIn(res);
       }
     }
+
+    return responseService.badCredentials(res);
   }
 }
 
