@@ -47,6 +47,14 @@ class ResponseService {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(errorMessage));
   }
+
+  public unauthorized(res: ServerResponse, message = 'Unauthorized') {
+    const unauthorizedMessage: ResponseMessage = { message };
+
+    res.statusCode = 401;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(unauthorizedMessage));
+  }
 }
 
 export const responseService = new ResponseService();
