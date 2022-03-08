@@ -19,7 +19,7 @@ class LocalDatabase implements Database<User> {
   }
 
   public findOne(candidate: User): User | undefined {
-    const user = this.database.find((user) => user.email === candidate?.email);
+    const user = this.database.find((user) => user.email === candidate.email);
     if (user) {
       return user;
     }
