@@ -9,7 +9,15 @@ export interface Config {
     BAD_REQUEST: number;
     UNAUTHORIZED: number;
     NOT_FOUND: number;
+    INTERNAL_SERVER_ERROR: number;
   };
-  DEFAULT_LIMIT: number;
+  mimeTypes: {
+    HTML: string;
+    CSS: string;
+    JS: string;
+    JSON: string;
+    BIN: string;
+  };
+  DEFAULT_PICTURE_LIMIT: number;
   SECRET_AUTHORIZATION_TOKEN: string;
 }

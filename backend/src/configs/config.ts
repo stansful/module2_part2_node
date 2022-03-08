@@ -11,7 +11,15 @@ export const config: Config = {
     BAD_REQUEST: 400,
     UNAUTHORIZED: 401,
     NOT_FOUND: 404,
+    INTERNAL_SERVER_ERROR: 500,
   },
-  DEFAULT_LIMIT: 5,
+  mimeTypes: {
+    HTML: 'text/html',
+    CSS: 'text/css',
+    JS: 'text/javascript',
+    JSON: 'application/json',
+    BIN: 'application/octet-stream',
+  },
+  DEFAULT_PICTURE_LIMIT: 6,
   SECRET_AUTHORIZATION_TOKEN: 'token',
 };
