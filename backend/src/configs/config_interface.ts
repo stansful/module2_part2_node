@@ -5,4 +5,5 @@ export interface Config {
     DOMAIN: string;
   };
   DEFAULT_LIMIT: number;
+  SECRET_AUTHORIZATION_TOKEN: string;
 }

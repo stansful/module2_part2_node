@@ -7,4 +7,5 @@ export const config: Config = {
     DOMAIN: process.env.DOMAIN || 'localhost',
   },
   DEFAULT_LIMIT: 5,
+  SECRET_AUTHORIZATION_TOKEN: 'token',
 };
