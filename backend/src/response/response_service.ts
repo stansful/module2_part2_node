@@ -13,7 +13,7 @@ class ResponseService {
     const errorMessage: ResponseErrorMessage = { errorMessage: message };
 
     res.statusCode = config.httpStatusCodes.UNAUTHORIZED;
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', config.mimeTypes.JSON);
     res.end(JSON.stringify(errorMessage));
   }
 
@@ -21,7 +21,7 @@ class ResponseService {
     const token: ResponseSuccessSignIn = { token: tokenService.token };
 
     res.statusCode = config.httpStatusCodes.OK;
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', config.mimeTypes.JSON);
     res.end(JSON.stringify(token));
   }
 
@@ -29,13 +29,13 @@ class ResponseService {
     const notFoundMessage: ResponseMessage = { message };
 
     res.statusCode = config.httpStatusCodes.NOT_FOUND;
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', config.mimeTypes.JSON);
     res.end(JSON.stringify(notFoundMessage));
   }
 
   public galleryObjects<Type>(res: ServerResponse, object: Type) {
     res.statusCode = config.httpStatusCodes.OK;
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', config.mimeTypes.JSON);
     res.end(JSON.stringify(object));
   }
 
@@ -45,7 +45,7 @@ class ResponseService {
     };
 
     res.statusCode = config.httpStatusCodes.BAD_REQUEST;
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', config.mimeTypes.JSON);
     res.end(JSON.stringify(errorMessage));
   }
 
@@ -53,7 +53,7 @@ class ResponseService {
     const unauthorizedMessage: ResponseMessage = { message };
 
     res.statusCode = config.httpStatusCodes.UNAUTHORIZED;
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', config.mimeTypes.JSON);
     res.end(JSON.stringify(unauthorizedMessage));
   }
 }
