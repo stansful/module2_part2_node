@@ -19,7 +19,7 @@ yarn start
 
 ## Issues
 
-If you find any [issue](https://github.com/stansful/module1_part2/issues), please submit it.
+If you find any [issue](https://github.com/stansful/module2_part2_node/issues), please submit it.
 
 ## Stay in touch
 

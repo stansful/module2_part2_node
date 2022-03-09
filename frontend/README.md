@@ -5,7 +5,6 @@
 
 ## Folder Structure:
 
-
 ```
 .
 ├── src
@@ -33,30 +32,39 @@
 ## Getting started
 
 1. Install dependencies
+
 ```
 npm install 
     # or
 yarn install
 ```
+
 2. Compile project
+
 ```
 npm run build
     # or
 yarn build
 ```
+
 3. Open index.html using IDE to avoid CORS errors
-* in VS Code you need to install [this plugin](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+
+* in VS Code you need to
+  install [this plugin](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 * in IntelliJ - enable by default
 
 ## Other commands:
 
 * format code with prettier
+
 ```
 npm run format
     # or
 yarn format
 ```
+
 * lint and fix with eslint
+
 ```
 npm run lint
     # or
@@ -65,7 +73,7 @@ yarn lint
 
 ## Issues
 
-If you find any [issue](https://github.com/stansful/module1_part2/issues), please submit it.
+If you find any [issue](https://github.com/stansful/module2_part2_node/issues), please submit it.
 
 ## Stay in touch
 
