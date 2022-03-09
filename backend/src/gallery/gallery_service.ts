@@ -31,9 +31,9 @@ class GalleryService {
     const start = page === 1 ? 0 : offset;
     const end = start + limit;
 
-    const requiredPictures = allPictures
-      .slice(start, end)
-      .map((picture) => (picture = `${config.env.PROTOCOL}://${config.env.DOMAIN}:${config.env.PORT}/${picture}`));
+    const requiredPictures = allPictures.slice(start, end).map((picture) => {
+      return `${config.env.PROTOCOL}://${config.env.DOMAIN}:${config.env.PORT}/${picture}`;
+    });
 
     const galleryObjects: Gallery = { objects: requiredPictures, page, total: totalPages };
 
