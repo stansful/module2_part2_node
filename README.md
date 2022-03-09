@@ -1,6 +1,6 @@
 ## Description
 
-1. Detailed description is available in appropriate folders
+1. Detailed description is available in appropriated folders
 
 ## Getting started
 
