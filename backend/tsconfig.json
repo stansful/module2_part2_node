@@ -16,7 +16,7 @@
     "target": "ES2019",
     "lib": ["ES2019", "esnext.asynciterable", "DOM"],
     "outDir": "dist",
-    "rootDir": "./",
+    "rootDir": "./src",
     "baseUrl": "./src",
   },
   "exclude": ["node_modules", "dist", ".git"]
