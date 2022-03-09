@@ -26,7 +26,7 @@ staticService.addStaticRoutes(
   staticConfig.path.pictures,
   staticRouter,
   staticService.streamHandler,
-  config.mimeTypes.JPEG,
+  config.mimeTypes.BIN,
 );
 staticService.addStaticRoutes(
   staticConfig.files.css,
