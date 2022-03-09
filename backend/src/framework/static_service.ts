@@ -44,12 +44,12 @@ class StaticService {
     contentTypeValue: string,
     endpointPrefix = '',
   ) {
-    subject.forEach((file) => {
-      const filePath = path.join(subjectPath, file);
+    subject.forEach((name) => {
+      const filePath = path.join(subjectPath, name);
 
-      router.get(`${endpointPrefix}/${file}`, handler(filePath, contentTypeValue));
+      router.get(`${endpointPrefix}/${name}`, handler(filePath, contentTypeValue));
 
-      if (file === 'index.html') {
+      if (name === 'index.html') {
         router.get('/', handler(filePath, contentTypeValue));
       }
     });
