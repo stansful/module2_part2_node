@@ -7,12 +7,12 @@ import { Router } from './router';
 import path from 'path';
 
 class StaticService {
-  public streamHandler(filePath: string): VoidHandler {
+  public streamHandler(filePath: string, contentTypeValue: string): VoidHandler {
     return async function (req: IncomingMessage, res: ServerResponse) {
       const stream = createReadStream(filePath);
 
       stream.on('open', () => {
-        res.setHeader('Content-Type', config.mimeTypes.BIN);
+        res.setHeader('Content-Type', contentTypeValue);
         stream.pipe(res);
       });
       stream.on('end', () => {
