@@ -19,6 +19,7 @@ export const config: Config = {
     JS: 'text/javascript',
     JSON: 'application/json',
     BIN: 'application/octet-stream',
+    JPEG: 'image/jpeg',
   },
   DEFAULT_PICTURE_LIMIT: 6,
   SECRET_AUTHORIZATION_TOKEN: 'token',

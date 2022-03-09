@@ -17,6 +17,7 @@ export interface Config {
     JS: string;
     JSON: string;
     BIN: string;
+    JPEG: string;
   };
   DEFAULT_PICTURE_LIMIT: number;
   SECRET_AUTHORIZATION_TOKEN: string;
