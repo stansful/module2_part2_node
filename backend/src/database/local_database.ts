@@ -36,12 +36,9 @@ class LocalDatabase implements Database<User> {
   }
 
   public delete(candidate: User): User {
-    const user = this.findOne(candidate);
-    if (!user) {
-      throw new Error('User didnt exist');
-    }
+    const user = this.getOne(candidate);
     this.database.filter((user) => user.email !== candidate.email);
-    return candidate;
+    return user;
   }
 }
 
