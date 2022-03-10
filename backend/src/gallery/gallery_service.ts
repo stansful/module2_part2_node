@@ -1,43 +1,74 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import fs from 'fs/promises';
-import path from 'path';
+import { Gallery, Position } from './gallery_interface';
 import { config } from '../configs/config';
 import { responseService } from '../response/response_service';
-import { Gallery } from './gallery_interface';
 import { tokenService } from '../token/token_service';
 
 class GalleryService {
-  public async findAll(req: IncomingMessage, res: ServerResponse, url: URL) {
-    const token = req.headers.authorization || '';
+  limit: number;
+  picturesPath: string;
+
+  constructor() {
+    this.limit = config.DEFAULT_PICTURE_LIMIT;
+    this.picturesPath = config.static.path.pictures;
+  }
+
+  private static checkToken(token: string) {
     const isValid = tokenService.validateToken(token);
-
     if (!isValid) {
-      return responseService.unauthorized(res);
+      throw new Error('Token is not valid');
     }
+  }
 
-    const limit = config.DEFAULT_PICTURE_LIMIT;
-    const page = Number(url.searchParams.get('page')) || 1;
-
-    const picturesPath = path.resolve(__dirname, '..', '..', 'static', 'pictures');
-    const allPictures = await fs.readdir(picturesPath);
-
-    const totalPages = Math.ceil(allPictures.length / limit);
-
-    if (page > totalPages || page < 0) {
-      return responseService.badRequest(res, totalPages);
+  private static checkPageBorders(page: number, total: number) {
+    const isValid = page > 0 && page <= total;
+    if (!isValid) {
+      throw new Error('Page is not valid');
     }
+  }
 
-    const offset = page === 1 ? page : (page - 1) * limit;
-    const start = page === 1 ? 0 : offset;
-    const end = start + limit;
+  private calculateCopyPositions(requestPage: number): Position {
+    const offset = requestPage === 1 ? requestPage : (requestPage - 1) * this.limit;
+    const start = requestPage === 1 ? 0 : offset;
+    const end = start + this.limit;
+    return { start, end };
+  }
 
-    const requiredPictures = allPictures.slice(start, end).map((picture) => {
-      return `${config.env.PROTOCOL}://${config.env.DOMAIN}:${config.env.PORT}/${picture}`;
+  private async getTotalPages() {
+    const allPictures = await this.getAllPictures();
+    return Math.ceil(allPictures.length / this.limit);
+  }
+
+  private async getAllPictures() {
+    return fs.readdir(this.picturesPath);
+  }
+
+  private async getRequiredPictures(startPosition: number, endPosition: number) {
+    const pictures = await this.getAllPictures();
+    return pictures.slice(startPosition, endPosition).map((pictureName) => {
+      return `${config.env.PROTOCOL}://${config.env.DOMAIN}:${config.env.PORT}/${pictureName}`;
     });
+  }
 
-    const galleryObjects: Gallery = { objects: requiredPictures, page, total: totalPages };
+  private createSendingObject(picturesPath: string[], requestPage: number, totalPages: number): Gallery {
+    return { objects: picturesPath, page: requestPage, total: totalPages };
+  }
 
-    responseService.galleryObjects<Gallery>(res, galleryObjects);
+  public async sendRequiredPictures(req: IncomingMessage, res: ServerResponse, url: URL) {
+    const token = req.headers.authorization || '';
+    const requestPage = Number(url.searchParams.get('page')) || 1;
+    const position = this.calculateCopyPositions(requestPage);
+    const totalPages = await this.getTotalPages();
+    try {
+      GalleryService.checkToken(token);
+      GalleryService.checkPageBorders(requestPage, totalPages);
+      const requiredPictures = await this.getRequiredPictures(position.start, position.end);
+      const sendingObject = this.createSendingObject(requiredPictures, requestPage, totalPages);
+      responseService.galleryObjects<Gallery>(res, sendingObject);
+    } catch (error) {
+      responseService.badRequest(res, position.end);
+    }
   }
 }
 
