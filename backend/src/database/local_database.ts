@@ -14,7 +14,7 @@ class LocalDatabase implements Database<User> {
     users.forEach((user) => this.create(user));
   }
 
-  public findAll(): User[] {
+  public getAll(): User[] {
     return this.database;
   }
 
