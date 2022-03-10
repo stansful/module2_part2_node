@@ -67,7 +67,7 @@ class GalleryService {
       const sendingObject = this.createSendingObject(requiredPictures, requestPage, totalPages);
       responseService.galleryObjects<Gallery>(res, sendingObject);
     } catch (error) {
-      responseService.badRequest(res, position.end);
+      responseService.badRequest(res, totalPages);
     }
   }
 }
