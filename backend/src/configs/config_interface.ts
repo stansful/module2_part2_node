@@ -1,3 +1,11 @@
+interface Path {
+  [key: string]: string;
+}
+
+interface Files {
+  [key: string]: string[];
+}
+
 export interface Config {
   env: {
     PORT: number;
@@ -18,6 +26,10 @@ export interface Config {
     JSON: string;
     BIN: string;
     JPEG: string;
+  };
+  static: {
+    path: Path;
+    files: Files;
   };
   DEFAULT_PICTURE_LIMIT: number;
   SECRET_AUTHORIZATION_TOKEN: string;
