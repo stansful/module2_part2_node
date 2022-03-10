@@ -24,7 +24,7 @@ const validatePage = () => {
       const pageNumber = location.search.split('?page=').pop();
       setNewPage(Number(pageNumber));
     } else {
-      alert(PAGE_DID_NOT_EXIST);
+      alert(PAGE_DOES_NOT_EXIST);
       setNewPage();
     }
   }
