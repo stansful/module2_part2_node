@@ -5,6 +5,7 @@ backend/.git
 backend/dist
 backend/node_modules
 backend/.env
+backend/static
 frontend/.idea
 frontend/.git
 frontend/js

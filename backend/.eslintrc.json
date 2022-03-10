@@ -5,8 +5,7 @@
   },
   "extends": [
     "google",
-    "prettier",
-    "import"
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -14,12 +13,15 @@
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier",
+    "import"
   ],
   "rules": {
     "prettier/prettier": [
       "error"
     ],
+    "require-jsdoc": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
     "import/extensions": "off"
