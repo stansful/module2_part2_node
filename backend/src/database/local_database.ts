@@ -27,12 +27,13 @@ class LocalDatabase implements Database<User> {
   }
 
   public create(candidate: User): User {
-    const user = this.findOne(candidate);
-    if (user) {
-      throw new Error('User already exist');
+    try {
+      this.getOne(candidate);
+    } catch (e) {
+      this.database.push(candidate);
+      return candidate;
     }
-    this.database.push(candidate);
-    return candidate;
+    throw new Error('User already exist');
   }
 
   public delete(candidate: User): User {
