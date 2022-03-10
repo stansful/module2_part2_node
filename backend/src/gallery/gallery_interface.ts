@@ -3,3 +3,8 @@ export interface Gallery {
   page: number;
   total: number;
 }
+
+export interface Position {
+  start: number;
+  end: number;
+}
