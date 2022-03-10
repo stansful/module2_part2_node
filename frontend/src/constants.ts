@@ -1,5 +1,5 @@
 const API_URL = 'http://localhost:5000';
-const PAGE_DID_NOT_EXIST = 'Page didnt exist, we set page to 1';
+const PAGE_DOES_NOT_EXIST = 'Page doesnt exist, we set page to 1';
 const VALIDATION_FAILED = 'Please re-enter password & username';
 const EVENT_TYPES = {
   submit: 'submit',
