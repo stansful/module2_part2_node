@@ -41,4 +41,9 @@ class GalleryService {
   }
 }
 
-export const galleryService = new GalleryService();
+const saveContext = (req: IncomingMessage, res: ServerResponse, url: URL) => {
+  const galleryService = new GalleryService();
+  return galleryService.sendRequiredPictures(req, res, url);
+};
+
+export const galleryService = saveContext;
