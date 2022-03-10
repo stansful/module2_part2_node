@@ -4,6 +4,6 @@ import { galleryService } from './gallery_service';
 
 const galleryRouter = new Router();
 
-galleryRouter.get('/gallery', galleryService.findAll as VoidHandler);
+galleryRouter.get('/gallery', galleryService as VoidHandler);
 
 export { galleryRouter };
