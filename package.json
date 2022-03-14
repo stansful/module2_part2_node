@@ -8,6 +8,7 @@
   "scripts": {
     "start": "npm run build && npm run copy && npm run node:start",
     "node:start": "cd backend && npm run start",
+    "node:dev": "cd backend && npm run dev",
     "build": "npm run build:frontend && npm run build:backend",
     "build:frontend": "cd frontend && npm install && npm run build",
     "build:backend": "cd backend && npm install && npm run build",
@@ -15,6 +16,6 @@
     "copy:html": "cp frontend/index.html backend/static/frontend/ && cp frontend/gallery.html backend/static/frontend/",
     "copy:css": "cp -R frontend/css backend/static/frontend/",
     "copy:js": "cp -R frontend/js backend/static/frontend/",
-    "create:frontend-folder": "mkdir backend/static/frontend"
+    "create:frontend-folder": "mkdir -p backend/static/frontend"
   }
 }

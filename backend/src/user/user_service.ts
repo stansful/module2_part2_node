@@ -7,17 +7,17 @@ class UserService {
   public signIn(req: IncomingMessage, res: ServerResponse, url: URL, body: User) {
     const candidate: User = { email: body.email, password: body.password };
 
-    const user = localDatabase.findOne(candidate);
-
-    if (user) {
+    try {
+      const user = localDatabase.getOne(candidate);
       const passwordMatch = user.password === candidate.password;
 
       if (passwordMatch) {
         return responseService.successSignIn(res);
       }
+      responseService.badCredentials(res);
+    } catch (error) {
+      responseService.badCredentials(res);
     }
-
-    return responseService.badCredentials(res);
   }
 }
 

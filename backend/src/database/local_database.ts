@@ -14,33 +14,32 @@ class LocalDatabase implements Database<User> {
     users.forEach((user) => this.create(user));
   }
 
-  public findAll(): User[] {
+  public getAll(): User[] {
     return this.database;
   }
 
-  public findOne(candidate: User): User | undefined {
+  public getOne(candidate: User): User {
     const user = this.database.find((user) => user.email === candidate.email);
-    if (user) {
-      return user;
+    if (!user) {
+      throw new Error('User does not exist');
     }
+    return user;
   }
 
   public create(candidate: User): User {
-    const user = this.findOne(candidate);
-    if (user) {
-      throw new Error('User already exist');
+    try {
+      this.getOne(candidate);
+    } catch (e) {
+      this.database.push(candidate);
+      return candidate;
     }
-    this.database.push(candidate);
-    return candidate;
+    throw new Error('User already exist');
   }
 
   public delete(candidate: User): User {
-    const user = this.findOne(candidate);
-    if (!user) {
-      throw new Error('User didnt exist');
-    }
+    const user = this.getOne(candidate);
     this.database.filter((user) => user.email !== candidate.email);
-    return candidate;
+    return user;
   }
 }
 

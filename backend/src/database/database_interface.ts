@@ -1,7 +1,7 @@
 export interface Database<Type> {
-  findAll(): Type[];
+  getAll(): Type[];
 
-  findOne(any: Type): Type | undefined;
+  getOne(any: Type): Type;
 
   create(any: Type): Type;
 
